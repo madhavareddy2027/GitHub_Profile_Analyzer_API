@@ -4,15 +4,16 @@ const mysql2 = require("mysql2");
 const cors = require("cors");
 app.use(cors());
 app.use(express.json());
+require("dotenv").config();
 const profileRouter = require("./routes/AllprofileRoutes");
 const specificUser = require("./routes/specificUser");
 const analyzeProfile = require("./routes/analyzeProfile")
 const connectDataBase = mysql2.createConnection({
-    host: "127.0.0.1",
-    user: "root",
-    database: "github_analyzer",
-    password: "Comrade1989@",
-    port: 3306
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT
 }).promise();
 
 app.locals.connectDataBase = connectDataBase;
